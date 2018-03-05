@@ -1,0 +1,26 @@
+{
+  "name": "eureka/EurekaTemplate",
+  "description": "Basic Template for a web application with Eureka Framework",
+  "type": "project",
+  "license": "MIT",
+
+  "authors": [
+    {
+      "name": "Romain Cottard",
+      "role": "Developer"
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "Eureka\\Script\\": "./scripts"
+    }
+  },
+
+  "require": {
+    "eureka/kernel-http": "^1.0",
+    "eureka/kernel-console": "^1.0",
+    "eureka/eureka-package-core": "^1.0",
+    "eureka/theme-bootstrap-bootswatch": "^1.0"
+  }
+}

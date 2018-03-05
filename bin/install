@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+PROJECT_DIR="$( cd "$(dirname "$0")/.." && pwd )"
+PROJECT_VERSION=""
+PROJECT_DOMAIN="example.com"
+ENV_MODE="prod"
+PROJECT_CONFIG_PROD="/path/to/not/committed/config/${PROJECT_DOMAIN}/"
+
+if [ ! -z ${1} ]; then
+    ENV_MODE=${1}
+fi
+
+if [ ! -z ${2} ]; then
+    PROJECT_VERSION=${2}
+fi
+
+if [ ! -z ${3} ]; then
+    PROJECT_VERSION=${3}
+fi
+
+if [ ! -z ${4} ]; then
+    PROJECT_CONFIG_PROD="${4}/${PROJECT_DOMAIN}/"
+fi
+
+source "${PROJECT_DIR}/bash/common.sh"
+source "${PROJECT_DIR}/bash/composer.sh"
+
+copy_database_config "${PROJECT_DIR}" "${PROJECT_CONFIG_PROD}"
+copy_composer_json "${PROJECT_DIR}"
+install_composer_dependencies "${PROJECT_DIR}"
+
+pushd "${PROJECT_DIR}" > /dev/null
+
+bin/console --color EurekaTemplate/Script/Install --domain=${PROJECT_DOMAIN} --env=${ENV_MODE} --version=${PROJECT_VERSION}
+
+popd > /dev/null
+
+

@@ -1,0 +1,14 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+# Packages includes. Load configs files from config path
+
+all:
+
+  eureka-package-core:
+    namespace: 'app'
+    config:  '__DIR__/../vendor/eureka/eureka-package-core/config'

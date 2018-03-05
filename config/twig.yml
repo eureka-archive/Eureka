@@ -1,0 +1,15 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+# File to configure twig layout / templates
+
+
+all:
+  theme:
+    layout: '__DIR__/../vendor/eureka/theme-bootstrap-bootswatch/resources/layout'
+    template: '__DIR__/../vendor/eureka/theme-bootstrap-bootswatch/resources/template'
+

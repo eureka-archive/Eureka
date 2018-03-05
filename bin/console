@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * Copyright (c) Romain Cottard
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Eureka\Kernel\Console\Kernel;
+use Eureka\Eurekon\Console;
+
+//~ Define Loader & add main classes for config
+require_once __DIR__ . '/../vendor/autoload.php';
+
+try {
+
+    //~ Init kernel
+    $env    = getenv('EKA_ENV') ?: 'prod';
+    $debug  = ($env !== 'prod');
+    $kernel = new Kernel(__DIR__ . '/..', $env, $debug);
+
+
+    $console = (new Console($argv, $kernel->getContainer()))
+        //->setBaseNamespace('\Eureka\Component')
+        //->setLogger()
+    ;
+
+    $console->before();
+    $console->run();
+    $console->after();
+    $console->terminate();
+
+} catch (\Psr\Container\NotFoundExceptionInterface $exception) {
+    echo 'Exception: ' . $exception->getMessage() . PHP_EOL;
+    exit(1);
+} catch (\Exception $exception) {
+    echo 'Exception: ' . $exception->getMessage() . PHP_EOL;
+    exit(1);
+}

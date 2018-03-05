@@ -1,0 +1,12 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+all:
+  root: '__DIR__/..'
+
+  # Shorthand for / or \ in current system path.
+  sep: 'DIRECTORY_SEPARATOR'

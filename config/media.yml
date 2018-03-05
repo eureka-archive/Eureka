@@ -1,0 +1,31 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+all:
+  image:
+    path: '/static/media/images'
+    dir: '__DIR__/../web/static/media/images'
+
+  video:
+    path: '/static/media/videos'
+    dir: '__DIR__/../web/static/media/videos'
+
+  thumbnail:
+    path: '/static/cache/thumbnail/'
+    dir: '__DIR__/../web/static/cache/thumbnail'
+    regexp:
+      pattern: '`([a-f0-9]{1})/([a-f0-9]{1})/([a-f0-9]{1})/([a-f0-9]{32})_([0-9]{2,4})_([0-9]{2,4}).(jpg|png)`'
+      mapping:
+        - 'match'
+        - 'sub1'
+        - 'sub2'
+        - 'sub3'
+        - 'md5'
+        - 'maxWidth'
+        - 'maxHeight'
+        - 'extension'
+

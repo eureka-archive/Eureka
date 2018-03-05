@@ -1,0 +1,19 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+all:
+  -
+    label: 'Menu 1'
+    route: 'home'
+    submenu:
+      -
+        label: 'Sub Menu 1'
+        route: 'home'
+
+  -
+    label: 'Menu 2'
+    route: 'home'

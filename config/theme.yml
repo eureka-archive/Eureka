@@ -1,0 +1,27 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+# File to configure theme-ing
+
+
+all:
+  name: 'pulse'
+  static:
+    path: '{BASE}/{VENDOR}/{NAME}-{PACKAGE}-{THEME}/resources/static/{MODULE}/{TYPE}/{FILENAME}.{EXT}'
+    cache_enabled: true
+    cache_path: '__DIR__/../web/static'
+
+  navbar:
+    bg: 'bg-primary'
+
+dev:
+  static:
+    cache_enabled: true
+
+preprod:
+  static:
+    cache_enabled: false

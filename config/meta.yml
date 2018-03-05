@@ -1,0 +1,29 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+all:
+
+  title: 'My Website'
+  charset: 'utf-8'
+  description: 'Meta description for my website app.'
+  keywords: 'my website, meta, keyword'
+  author: 'Romain Cottard'
+  version: '1.0.0'
+  copyright:
+    year: 'now'
+    name: 'Romain Cottard'
+  footer:
+    links: []
+
+dev:
+  title: 'My Website - DEV'
+
+preprod:
+  title: 'My Website - PREPROD'
+
+prod:
+  title: 'My Website'
