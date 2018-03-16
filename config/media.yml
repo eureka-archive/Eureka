@@ -8,15 +8,15 @@
 all:
   image:
     path: '/static/media/images'
-    dir: '__DIR__/../web/static/media/images'
+    dir: '%app.app.root%/web/static/media/images'
 
   video:
     path: '/static/media/videos'
-    dir: '__DIR__/../web/static/media/videos'
+    dir: '%app.app.root%/web/static/media/videos'
 
   thumbnail:
     path: '/static/cache/thumbnail/'
-    dir: '__DIR__/../web/static/cache/thumbnail'
+    dir: '%app.app.root%/web/static/cache/thumbnail'
     regexp:
       pattern: '`([a-f0-9]{1})/([a-f0-9]{1})/([a-f0-9]{1})/([a-f0-9]{32})_([0-9]{2,4})_([0-9]{2,4}).(jpg|png)`'
       mapping:

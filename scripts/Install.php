@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Eureka\Script;
+namespace Application\Script;
 
 use Eureka\Eurekon;
 
@@ -16,12 +16,12 @@ use Eureka\Eurekon;
  * Architecture:
  *
  * Code Source:
- *   {PATH}/dev/[dev|devprod|preprod].{domain}[_v{VERSION}]/composer_{devprod|preprod|prod}.json
+ *   {PATH}/dev/[dev|devprod|preprod]-{domain}[_v{VERSION}]/
  * Media Source:
  *   {PATH]/dev/media/[images|videos]/{hexa1}/{hexa1}/{hexa1}/{hexa32}.{ext}
  *
  * Symlinks (for apache config document root)
- *   {PATH}/www/[dev|devprod|preprod].{domain}
+ *   {PATH}/www/[dev|devprod|preprod]-{domain}
  *   {PATH}/www/media
  *
  * @author  Romain Cottard
@@ -92,7 +92,7 @@ class Install extends Eurekon\AbstractScript
             case 'preprod':
             case 'prod':
                 if (empty($this->version)) {
-                    throw new \Exception('Empty version for preprod/prod env!');
+                    throw new \Exception('Empty version for prod env!');
                 }
                 break;
             default:
@@ -102,7 +102,7 @@ class Install extends Eurekon\AbstractScript
         $this->root = realpath(__DIR__ . '/..');
 
         $this->fixCachePerms();
-        //$this->linkMedia();
+        $this->linkMedia();
         $this->linkSite();
     }
 
@@ -115,23 +115,24 @@ class Install extends Eurekon\AbstractScript
     private function fixCachePerms()
     {
         $pathList = [
-            '/.cache'           => 0777,
-            '/.cache/tpl'       => 0777,
-            '/web/thumbnail'    => 0777,
-            '/web/static/cache' => 0777,
+            '/.cache/config'    => 0766,
+            '/.cache/container' => 0766,
+            '/web/static/cache' => 0766,
         ];
 
         foreach ($pathList as $path => $mode) {
             $fullPath = $this->root . $path;
 
             $this->out(' . Fix "' . $fullPath . '" directory');
-            if (!is_dir($fullPath) && !mkdir($fullPath, $mode, true)) {
+            if (!is_dir($fullPath) && !mkdir($fullPath, $mode & ~umask(), true)) {
                 throw new \Exception('Cannot create "' . $fullPath . '" directory !');
             }
 
-            if (!chmod($fullPath, $mode)) {
+            if (!chmod($fullPath, $mode & ~umask())) {
                 throw new \Exception('Cannot fix permissions for .cache/ dir!');
             }
+
+            clearstatcache(true, $fullPath);
         }
     }
 
@@ -145,7 +146,14 @@ class Install extends Eurekon\AbstractScript
     {
         $this->out(' . Create symlink to media directory');
 
-        $mediaDir  = realpath($this->root . '/../media');
+        $pathMedia = $this->root . '/../' . $this->domain . '-media';
+
+        if (!is_dir($pathMedia)) {
+            Eurekon\IO\Out::std('  > Skipped (Directory "' . $pathMedia . '" does not exists)');
+            return;
+        }
+
+        $mediaDir  = realpath($pathMedia);
         $staticDir = $this->root . '/web/static/media';
 
         exec('ln -s ' . escapeshellarg($mediaDir) . ' ' . escapeshellarg($staticDir));

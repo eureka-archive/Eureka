@@ -6,7 +6,7 @@
 ##
 
 all:
-  root: '__DIR__/..'
+  root: '__DIR__/../..'
 
   # Shorthand for / or \ in current system path.
   sep: 'DIRECTORY_SEPARATOR'

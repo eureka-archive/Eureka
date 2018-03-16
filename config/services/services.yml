@@ -14,8 +14,10 @@ all:
   error:
     class: \Eureka\Kernel\Http\Error\ErrorHandler
 
-  routing:
-    class: \Eureka\Component\Routing\RouteCollection
+  router:
+    class: \Eureka\Component\Routing\Router
+    params:
+      - "%app.routing%"
 
   twig.loader:
     class: \Twig_Loader_Filesystem

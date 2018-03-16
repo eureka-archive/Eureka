@@ -1,0 +1,44 @@
+##
+# Copyright (c) Romain Cottard
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+##
+
+all:
+  memcached:
+    enabled: true
+    driver: 'memcached'
+    server:
+      host: '127.0.0.1'
+      port: 11211
+
+  path: '%app.app.root%/.cache'
+
+  config:
+    path: '%app.cache.path%/config'
+    file: 'config.php'
+    enabled: true
+
+  container:
+    path:  '%app.cache.path%/container'
+    file:  '%app.cache.container.class%.php'
+    class: ''
+
+dev:
+  memcached:
+    enabled: false
+
+  config:
+    enabled: false
+
+  container:
+    class: 'ContainerServicesDev'
+
+preprod:
+  container:
+    class: 'ContainerServicesPreprod'
+
+prod:
+  container:
+    class: 'ContainerServicesProd'

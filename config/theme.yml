@@ -7,13 +7,12 @@
 
 # File to configure theme-ing
 
-
 all:
   name: 'pulse'
   static:
     path: '{BASE}/{VENDOR}/{NAME}-{PACKAGE}-{THEME}/resources/static/{MODULE}/{TYPE}/{FILENAME}.{EXT}'
     cache_enabled: true
-    cache_path: '__DIR__/../web/static'
+    cache_path: '%app.app.root%/web/static'
 
   navbar:
     bg: 'bg-primary'

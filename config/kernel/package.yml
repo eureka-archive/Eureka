@@ -11,4 +11,4 @@ all:
 
   eureka-package-core:
     namespace: 'app'
-    config:  '__DIR__/../vendor/eureka/eureka-package-core/config'
+    config:  '%app.app.root%/vendor/eureka/eureka-package-core/config'

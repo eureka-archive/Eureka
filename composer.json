@@ -1,5 +1,5 @@
 {
-  "name": "eureka/Eureka",
+  "name": "eureka/eureka",
   "description": "Basic Template for a web application with Eureka Framework",
   "type": "project",
   "license": "MIT",
@@ -13,14 +13,14 @@
 
   "autoload": {
     "psr-4": {
-      "Eureka\\Script\\": "./scripts"
+      "Application\\Script\\": "./scripts"
     }
   },
 
   "require": {
-    "eureka/kernel-http": "^1.0",
-    "eureka/kernel-console": "^1.0",
-    "eureka/eureka-package-core": "^1.0",
+    "eureka/kernel-http": "^1.1",
+    "eureka/kernel-console": "^1.1",
+    "eureka/eureka-package-core": "^1.2",
     "eureka/theme-bootstrap-bootswatch": "^1.0"
   }
 }
